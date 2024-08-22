@@ -1,3 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Ensure this file is properly imported in your project */
+
+.toggle-container {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    position: fixed; /* Use fixed positioning to keep it in place */
+    top: 16px; /* Adjust as needed */
+    right: 16px; /* Adjust as needed */
+    z-index: 50; /* Ensure it's above other content */
+    background-color: white; /* Optional: adds a background color */
+    padding: 4px; /* Optional: adds some padding around the elements */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    width: 300px; /* Fixed width to prevent shifting */
+    height:45px
+  }
+  
+  .form-check-input-lg {
+    width: 3rem; /* Adjust width */
+    height: 1.75rem; /* Adjust height */
+    cursor: pointer; /* Make sure the cursor indicates it's clickable */
+  }
+  
+  .fs-5 {
+    font-size: 1.25rem; /* Adjust font size */
+  }
+  
+  .edit-button {
+    margin-left: 1rem; /* Space between toggle and button */
+    font-size: 1.25rem; /* Adjust font size for the button */
+    display: inline-block; /* Ensure button appears on the same line */
+    white-space: nowrap; /* Prevent text wrapping */
+    height:40px;
+  }
+  

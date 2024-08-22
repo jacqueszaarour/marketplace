@@ -1,24 +1,26 @@
+// schema.prisma
+
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "sqlite" // Assuming you are using SQLite
+  url      = "file:./dev.db" // Path to your SQLite database
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id        Int     @id @default(autoincrement())
-  name      String
-  email     String  @unique
-  posts     Post[]
+model Product {
+  id       Int      @id @default(autoincrement())
+  name     String
+  price    Float
+  rating   Int
+  imageUrl String
+  cartItems CartItem[]
 }
 
-model Post {
+model CartItem {
   id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  Int
-  author    User     @relation(fields: [authorId], references: [id])
+  productId Int
+  quantity  Int
+  product   Product  @relation(fields: [productId], references: [id])
 }
