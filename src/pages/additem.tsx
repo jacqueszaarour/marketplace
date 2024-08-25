@@ -4,9 +4,47 @@ import { useRouter } from 'next/router';
 const AddItem: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
-  const [imageUrl, setImageUrl] = useState<string>('');
-  const [rating, setRating] = useState<number>(1);
+  const [color, setColor] = useState<string>('blue'); 
+  const [imageUrl, setImageUrl] = useState<string>('/blueflower.jpg'); // Default image
   const router = useRouter();
+
+  const handleColorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedColor = event.target.value;
+    setColor(selectedColor);
+
+    switch (selectedColor) {
+      case 'blue':
+        setImageUrl('/blueflower.jpg');
+        break;
+      case 'orange':
+        setImageUrl('/orangeflower.jpg');
+        break;
+      case 'pink':
+        setImageUrl('/pinkflower.jpg');
+        break;
+      case 'purple':
+        setImageUrl('/purpleflower.jpg');
+        break;
+      case 'green':
+        setImageUrl('/greenflower.jpg');
+        break;
+      case 'white':
+        setImageUrl('/whiteflower.jpg');
+        break;
+      case 'black':
+        setImageUrl('/blackflower.jpg');
+        break;
+      case 'yellow':
+        setImageUrl('/yellowflower.jpg');
+        break;
+      case 'red':
+        setImageUrl('/redflower.jpg');
+        break;
+      default:
+        setImageUrl('');
+        break;
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,7 +53,7 @@ const AddItem: React.FC = () => {
       name,
       price,
       imageUrl,
-      rating,
+      rating: -1,
     };
 
     try {
@@ -28,13 +66,17 @@ const AddItem: React.FC = () => {
       });
 
       if (response.ok) {
-        void router.push('/'); 
+        void router.push('/');
       } else {
         console.error('Failed to add item');
       }
     } catch (error) {
       console.error('Failed to add item:', error);
     }
+  };
+
+  const handleDoneClick = () => {
+    void router.push('/');
   };
 
   return (
@@ -58,37 +100,34 @@ const AddItem: React.FC = () => {
             type="number"
             id="price"
             className="form-control"
-            value={price}
-            onChange={(e) => setPrice(parseFloat(e.target.value))}
+            value={price.toString()} // Ensure value is a string
+            onChange={(e) => setPrice(parseFloat(e.target.value) || 0)} // Handle NaN by defaulting to 0
             required
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="imageUrl" className="form-label">Image URL</label>
-          <input
-            type="text"
-            id="imageUrl"
+          <label htmlFor="color" className="form-label">Color</label>
+          <select
+            id="color"
             className="form-control"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            value={color}
+            onChange={handleColorChange}
             required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="rating" className="form-label">Rating</label>
-          <input
-            type="number"
-            id="rating"
-            className="form-control"
-            min="1"
-            max="5"
-            value={rating}
-            onChange={(e) => setRating(parseInt(e.target.value, 10))}
-            required
-          />
+          >
+            <option value="blue">Blue</option>
+            <option value="orange">Orange</option>
+            <option value="pink">Pink</option>
+            <option value="purple">Purple</option>
+            <option value="green">Green</option>
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+          </select>
         </div>
         <button type="submit" className="btn btn-primary">Add Item</button>
       </form>
+      <button onClick={handleDoneClick} className="btn btn-secondary mt-3">Done</button>
     </div>
   );
 };

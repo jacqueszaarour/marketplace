@@ -23,13 +23,13 @@ const StoreManagerToggle: React.FC<StoreManagerToggleProps> = ({ onToggle }) => 
     <div className="toggle-container flex items-center space-x-4">
       <div className="form-check form-switch">
         <input
-          className="form-check-input form-check-input-lg"
+          className="form-check-input"
           type="checkbox"
           id="storeManagerToggle"
           checked={isStoreManager}
           onChange={handleToggle}
         />
-        <label className="form-check-label fs-5" htmlFor="storeManagerToggle">
+        <label className="form-check-label fs-6" htmlFor="storeManagerToggle">
           Store Manager
         </label>
       </div>

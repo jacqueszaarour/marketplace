@@ -35,7 +35,8 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    "src/**/*"
+    "src/**/*",
+    "tailwind.config.ts"  // Include the Tailwind config file
   ],
   "exclude": ["node_modules", "dist"]
 }
