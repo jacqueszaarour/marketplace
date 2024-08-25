@@ -4,8 +4,9 @@ import { CartItem } from "~/pages/index";
 interface CartSidebarProps {
   cartItems: CartItem[];
   onClose: () => void;
-  onRemove: (productId: number) => void; 
+  onRemove: (productId: number) => void;
   onDecreaseQuantity: (productId: number) => void;
+  onIncreaseQuantity: (productId: number) => void;
 }
 
 const CartSidebar: React.FC<CartSidebarProps> = ({
@@ -13,6 +14,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
   onClose,
   onRemove,
   onDecreaseQuantity,
+  onIncreaseQuantity,
 }) => {
   // Calculate the total price of the cart
   const totalPrice = cartItems.reduce(
@@ -23,7 +25,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
   return (
     <div
       className="cart-sidebar bg-light position-fixed h-100 end-0 top-0 p-4 shadow"
-      style={{ width: "500px", zIndex: 1050 }}
+      style={{ width: "300px", zIndex: 1050 }}
     >
       <button className="btn btn-secondary mb-4" onClick={onClose}>
         Close
@@ -36,26 +38,52 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
           {cartItems.map((item: CartItem) => (
             <li
               key={item.productId}
-              className="list-group-item d-flex justify-content-between align-items-center"
+              className="list-group-item d-flex justify-content-between align-items-center position-relative"
+              style={{ padding: "10px" }} // Increased padding
             >
-              <div>
-                <span>{item.product.name}</span> -{" "}
-                <span>${item.product.price.toFixed(2)} x {item.quantity}</span> ={" "}
-                <strong>${(item.product.price * item.quantity).toFixed(2)}</strong>
+              <button
+                className="btn btn-danger btn-sm position-absolute"
+                style={{ top: "-10px", left: "-10px" }} // Position X button on the top left
+                onClick={() => onRemove(item.productId)}
+              >
+                x
+              </button>
+              <div className="d-flex align-items-center">
+                <img
+                  src={item.product.imageUrl}
+                  alt={item.product.name}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    borderRadius: "5px",
+                  }}
+                />
+                <div className="ms-3">
+                  <div
+                    className="d-flex align-items-center justify-content-between"
+                    style={{ marginBottom: "10px" }} // Increased space between lines
+                  >
+                    <div>
+                      <span>${item.product.price.toFixed(2)}</span>
+                    </div>
+                  </div>
+                  <strong>${(item.product.price * item.quantity).toFixed(2)}</strong>
+                </div>
               </div>
-              <div>
+              <div className="d-flex flex-column align-items-center ms-3">
                 <button
-                  className="btn btn-danger btn-sm me-2"
+                  className="btn btn-light btn-sm"
+                  onClick={() => onIncreaseQuantity(item.productId)}
+                >
+                  +
+                </button>
+                <span> {item.quantity}</span>
+                <button
+                  className="btn btn-light btn-sm"
                   onClick={() => onDecreaseQuantity(item.productId)}
                 >
                   -
-                </button>
-                <span>{item.quantity}</span>
-                <button
-                  className="btn btn-danger btn-sm ms-2"
-                  onClick={() => onRemove(item.productId)}
-                >
-                  Remove
                 </button>
               </div>
             </li>

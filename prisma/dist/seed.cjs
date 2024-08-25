@@ -39,25 +39,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("@prisma/client");
 var prisma = new client_1.PrismaClient();
 var flowerColors = [
-    { name: "Red", imageUrl: "/redflower.jpg", price: 10, rating: 4 },
-    { name: "Black", imageUrl: "/blackflower.jpg", price: 30, rating: 1 },
-    { name: "Blue", imageUrl: "/blueflower.jpg", price: 15, rating: 5 },
-    { name: "Yellow", imageUrl: "/yellowflower.jpg", price: 8, rating: 3 },
-    { name: "Pink", imageUrl: "/pinkflower.jpg", price: 12, rating: 4 },
+    { name: "Red", imageUrl: "/redflower.jpg", price: 10, rating: -1 },
+    { name: "Black", imageUrl: "/blackflower.jpg", price: 30, rating: -1 },
+    { name: "Blue", imageUrl: "/blueflower.jpg", price: 15, rating: -1 },
+    { name: "Yellow", imageUrl: "/yellowflower.jpg", price: 8, rating: -1 },
+    { name: "Pink", imageUrl: "/pinkflower.jpg", price: 12, rating: -1 },
     {
         name: "Purple",
         imageUrl: "/purpleflower.jpg",
         price: 14,
-        rating: 5,
+        rating: -1,
     },
-    { name: "White", imageUrl: "/whiteflower.jpg", price: 9, rating: 3 },
+    { name: "White", imageUrl: "/whiteflower.jpg", price: 9, rating: -1 },
     {
         name: "Orange",
         imageUrl: "/orangeflower.jpg",
         price: 11,
-        rating: 4,
+        rating: -1,
     },
-    { name: "Green", imageUrl: "/greenflower.jpg", price: 13, rating: 5 },
+    { name: "Green", imageUrl: "/greenflower.jpg", price: 13, rating: -1 },
 ];
 function main() {
     return __awaiter(this, void 0, void 0, function () {

@@ -1,20 +1,29 @@
-import Image from 'next/image';
-import { useState } from 'react';
-import Rating from './Rating';
+import Image from "next/image";
+import { useState } from "react";
+import Rating from "./Rating";
 
 interface ProductItemProps {
-  id: number; 
+  id: number;
   name: string;
   price: number;
   imageUrl: string;
   rating: number;
   isStoreManager: boolean;
-  onDelete?: (id: number) => void;  
+  onDelete?: (id: number) => void;
   addToCart?: () => void;
+  cartQuantity?: number;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
-  id, name, price, imageUrl, rating, isStoreManager, onDelete, addToCart
+  id,
+  name,
+  price,
+  imageUrl,
+  rating,
+  isStoreManager,
+  onDelete,
+  addToCart,
+  cartQuantity,
 }) => {
   const [currentRating, setCurrentRating] = useState<number>(rating);
   const [hovered, setHovered] = useState<boolean>(false);
@@ -22,9 +31,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const handleRatingChange = async (newRating: number) => {
     try {
       const response = await fetch(`/api/products?id=${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ rating: newRating }),
       });
@@ -32,52 +41,79 @@ const ProductItem: React.FC<ProductItemProps> = ({
       if (response.ok) {
         setCurrentRating(newRating);
       } else {
-        console.error('Failed to update the rating');
+        console.error("Failed to update the rating");
       }
     } catch (error) {
-      console.error('Error updating rating:', error);
+      console.error("Error updating rating:", error);
     }
   };
 
   const handleDelete = async () => {
     try {
       const response = await fetch(`/api/products?id=${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
         onDelete?.(id);
       } else {
-        console.error('Failed to delete product.');
+        console.error("Failed to delete product.");
       }
     } catch (error) {
-      console.error('Failed to delete product:', error);
+      console.error("Failed to delete product:", error);
     }
   };
 
   return (
-    <div 
+    <div
       className="card h-100 position-relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {isStoreManager && (
+      {isStoreManager ? (
         <button
           onClick={handleDelete}
-          className="btn btn-sm btn-danger position-absolute top-0 end-0 m-2"
+          className="btn btn-sm btn-danger position-absolute end-0 top-0 m-2"
           style={{ zIndex: 10 }}
         >
           X
         </button>
+      ) : (
+        cartQuantity && cartQuantity > 0 && (
+          <div
+            className="position-absolute start-0 top-0 m-2"
+            style={{ zIndex: 10 }}
+          >
+            <Image src="/cart.jpg" alt="Cart" width={24} height={24} />
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-8px",
+                backgroundColor: "red",
+                color: "black",
+                borderRadius: "50%",
+                padding: "2px 5px",
+                fontSize: "0.75rem",
+                zIndex: 1,
+              }}
+            >
+              {cartQuantity}
+            </span>
+          </div>
+        )
       )}
-      <div className="position-relative d-flex align-items-center justify-content-center overflow-hidden" style={{ height: '200px' }}>
+      <div
+        className="position-relative d-flex align-items-center justify-content-center overflow-hidden"
+        style={{ height: "200px" }}
+      >
         <Image
           src={imageUrl}
           alt={name}
           width={205}
           height={200}
           className="img-fluid"
-          style={{ objectFit: 'contain', objectPosition: 'center' }}
+          style={{ objectFit: "contain", objectPosition: "center" }}
         />
         {!isStoreManager && addToCart && hovered && (
           <button

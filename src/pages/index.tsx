@@ -152,6 +152,14 @@ export default function Home() {
       }
     }
   };
+
+  const handleIncreaseQuantity = async (productId: number) => {
+    const cartItem = cart.find((item) => item.productId === productId);
+    if (cartItem) {
+      const newQuantity = cartItem.quantity + 1;
+        await updateCartItem(productId, newQuantity);
+      }
+    }
   
 
   const updateCartItem = async (productId: number, quantity: number) => {
@@ -185,7 +193,7 @@ export default function Home() {
       <h2 className="mb-4 text-center">Vention Flowers</h2>
       <div className="row">
         {products.map((product) => (
-          <div key={product.id} className="col-md-3 mb-4">
+          <div key={product.id} className="col-md-4 mb-4">
             <ProductItem
               {...product}
               isStoreManager={isStoreManager}
@@ -201,6 +209,7 @@ export default function Home() {
           onClose={closeCart}
           onRemove={handleremove}
           onDecreaseQuantity={handleDecreaseQuantity}
+          onIncreaseQuantity={handleIncreaseQuantity}
         />
       )}
     </div>
