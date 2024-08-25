@@ -84,6 +84,23 @@ export default function Home() {
     }
   };
 
+  const handleremove = async (productId: number) =>{
+    setCart((prevCart) => prevCart.filter((item) => item.productId !== productId));
+  
+    try {
+      const response = await fetch("/api/cart", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete the cart item from the database.");
+      }
+    } catch (error) {
+      console.error("Failed to delete cart item:", error);
+    }
+  }
+
   const handleDelete = async (productId: number) => {
     try {
       setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
@@ -118,10 +135,24 @@ export default function Home() {
       if (newQuantity > 0) {
         await updateCartItem(productId, newQuantity);
       } else {
-        await handleDelete(productId);
+        setCart((prevCart) => prevCart.filter((item) => item.productId !== productId));
+  
+        try {
+          const response = await fetch("/api/cart", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ productId }),
+          });
+          if (!response.ok) {
+            throw new Error("Failed to delete the cart item from the database.");
+          }
+        } catch (error) {
+          console.error("Failed to delete cart item:", error);
+        }
       }
     }
   };
+  
 
   const updateCartItem = async (productId: number, quantity: number) => {
     setCart((prevCart) =>
@@ -168,7 +199,7 @@ export default function Home() {
         <CartSidebar
           cartItems={cart}
           onClose={closeCart}
-          onRemove={handleDelete}
+          onRemove={handleremove}
           onDecreaseQuantity={handleDecreaseQuantity}
         />
       )}

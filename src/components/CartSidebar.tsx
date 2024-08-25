@@ -62,7 +62,6 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
           ))}
         </ul>
       )}
-      {/* Display the total price at the bottom */}
       <div className="mt-auto">
         <button className="btn btn-primary w-100">
           Total: ${totalPrice.toFixed(2)}
