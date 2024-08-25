@@ -8,7 +8,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "seed": "node prisma/dist/seed.cjs",
-    "start": "npm run build && npm run seed && npm run serve"
+    "start": "npm run seed && npm run dev",
+    "letsdothis": "npm install && npm run start"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",

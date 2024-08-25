@@ -40,6 +40,7 @@ var client_1 = require("@prisma/client");
 var prisma = new client_1.PrismaClient();
 var flowerColors = [
     { name: "Red", imageUrl: "/redflower.jpg", price: 10, rating: 4 },
+    { name: "Black", imageUrl: "/blackflower.jpg", price: 30, rating: 1 },
     { name: "Blue", imageUrl: "/blueflower.jpg", price: 15, rating: 5 },
     { name: "Yellow", imageUrl: "/yellowflower.jpg", price: 8, rating: 3 },
     { name: "Pink", imageUrl: "/pinkflower.jpg", price: 12, rating: 4 },
