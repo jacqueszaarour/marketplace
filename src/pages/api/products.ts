@@ -34,9 +34,16 @@ export default async function handler(
         return res.status(400).json({ error: "Invalid product ID format" });
       }
 
+      // First, delete any CartItems associated with the product
+      await prisma.cartItem.deleteMany({
+        where: { productId: numericId },
+      });
+
+      // Then, delete the product itself
       await prisma.product.delete({
         where: { id: numericId },
       });
+
       res.status(204).end();
     } else if (req.method === "PUT") {
       const { id } = req.query;

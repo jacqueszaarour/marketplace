@@ -32,3 +32,12 @@
     height:40px;
   }
   
+  .cart-sidebar {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+  }
+  
+  .cart-sidebar.hidden {
+    transform: translateX(100%);
+  }
+  

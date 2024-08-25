@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 
 interface StoreManagerToggleProps {
   onToggle: (isStoreManager: boolean) => void;
+  cartItemCount: number;
+  onCartClick: () => void;
 }
 
-const StoreManagerToggle: React.FC<StoreManagerToggleProps> = ({ onToggle }) => {
+const StoreManagerToggle: React.FC<StoreManagerToggleProps> = ({ onToggle, cartItemCount, onCartClick }) => {
   const [isStoreManager, setIsStoreManager] = useState<boolean>(false);
   const router = useRouter();
 
@@ -33,12 +35,19 @@ const StoreManagerToggle: React.FC<StoreManagerToggleProps> = ({ onToggle }) => 
           Store Manager
         </label>
       </div>
-      {isStoreManager && (
+      {isStoreManager ? (
         <button
           className="btn btn-primary edit-button"
           onClick={handleAddItemClick}
         >
           Add Item
+        </button>
+      ) : (
+        <button
+          className="btn btn-primary edit-button"
+          onClick={onCartClick}
+        >
+          Cart ({cartItemCount})
         </button>
       )}
     </div>

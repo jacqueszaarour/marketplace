@@ -3,17 +3,21 @@ import { useState } from 'react';
 import Rating from './Rating';
 
 interface ProductItemProps {
-  id: string;
+  id: number; 
   name: string;
   price: number;
   imageUrl: string;
   rating: number;
   isStoreManager: boolean;
-  onDelete: (id: string) => void;
+  onDelete?: (id: number) => void;  
+  addToCart?: () => void;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ id, name, price, imageUrl, rating, isStoreManager, onDelete }) => {
+const ProductItem: React.FC<ProductItemProps> = ({
+  id, name, price, imageUrl, rating, isStoreManager, onDelete, addToCart
+}) => {
   const [currentRating, setCurrentRating] = useState<number>(rating);
+  const [hovered, setHovered] = useState<boolean>(false);
 
   const handleRatingChange = async (newRating: number) => {
     try {
@@ -35,29 +39,60 @@ const ProductItem: React.FC<ProductItemProps> = ({ id, name, price, imageUrl, ra
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/products?id=${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        onDelete?.(id);
+      } else {
+        console.error('Failed to delete product.');
+      }
+    } catch (error) {
+      console.error('Failed to delete product:', error);
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full rounded-lg bg-white p-4 shadow relative">
+    <div 
+      className="card h-100 position-relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {isStoreManager && (
         <button
-          onClick={() => onDelete(id)}
-          className="absolute top-2 right-2 text-red-600 hover:text-red-800 bg-white rounded-full w-6 h-6 flex items-center justify-center"
+          onClick={handleDelete}
+          className="btn btn-sm btn-danger position-absolute top-0 end-0 m-2"
+          style={{ zIndex: 10 }}
         >
-          ✖
+          X
         </button>
       )}
-      <div className="h-64 w-full overflow-hidden rounded-lg mb-4 flex items-center justify-center">
+      <div className="position-relative d-flex align-items-center justify-content-center overflow-hidden" style={{ height: '200px' }}>
         <Image
           src={imageUrl}
           alt={name}
-          width={270} 
+          width={205}
           height={200}
-          className="object-contain rounded-lg"
+          className="img-fluid"
+          style={{ objectFit: 'contain', objectPosition: 'center' }}
         />
+        {!isStoreManager && addToCart && hovered && (
+          <button
+            onClick={addToCart}
+            className="btn btn-sm btn-light position-absolute top-50 start-50 translate-middle"
+            style={{ opacity: 0.9, zIndex: 5 }}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
-      <div className="flex flex-col items-center">
-        <h3 className="text-lg font-bold text-center">{name}</h3>
-        <p className="text-gray-600 text-center">${price.toFixed(2)}</p>
-        <div className="text-gray-600 text-center">
+      <div className="card-body text-center">
+        <h5 className="card-title">{name}</h5>
+        <p className="card-text">${price.toFixed(2)}</p>
+        <div className="text-center">
           <Rating
             count={5}
             value={currentRating}
