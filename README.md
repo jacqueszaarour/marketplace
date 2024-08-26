@@ -1,29 +1,40 @@
-# Create T3 App
+#Vention MachineCloud Test#
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+##Overview##
 
-## What's next? How do I make an app with this?
+###This project is a simple marketplace application built using React, where users can view a list of items, add them to their cart, and rate the products. It also includes functionality to remove items from the cart and ensures that all interactions are reflected in the user interface. The backend is implemented to persist the state in a database, and the project utilizes the T3 stack as a template.###
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+##Features##
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+###Product Listing: Displays a list of products that can be added to the cart.
+Add to Cart: Users can add products to their cart, and the UI updates to reflect the current cart contents.
+Remove from Cart: Users can remove products from their cart, with immediate UI updates.
+Product Rating: Users can rate products with a score from 1 to 5.
+State Persistence: The application persists state in a database, ensuring data is not lost between sessions.
+TypeScript: The project is implemented using TypeScript for type safety and better developer experience.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
+##Extra Notes##
+
+###There is a "store Manager" toggle, this represents the acces an admin would have, where they can delete and add items. 
+When an item is deleted, is will be automatically removed from th ecart. 
+Only one user, no sign in required since the project was simple.###
 
 
-## Learn More
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+##Working on this project has been an incredibly rewarding experience. In just one week, I learned more than I ever thought I could, thank you for that :) .##
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+##Technology Stack##
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+###Frontend: React, TypeScript, Bootstrap
+Backend: Node.js, Prisma, SQLite
+Template: T3 Stack
+Learning and Experience###
 
-## How do I deploy this?
+##Setup and Installation###
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+#To run this application locally, follow these steps:# Let's do this!#
+
+###-Clone the repository:
+run "npm run letsdothis" in your terminal
+
+This command will build the project, seed the database, and launch the application. You can then open it on http://localhost:3000 ##
