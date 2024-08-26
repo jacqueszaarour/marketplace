@@ -3,6 +3,22 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export async function getProductsWithCartQuantity() {
+  const products = await prisma.product.findMany({
+    include: {
+      cartItems: true,
+    },
+  });
+
+  return products.map((product) => ({
+    ...product,
+    cartQuantity: product.cartItems.reduce(
+      (acc, item) => acc + item.quantity,
+      0,
+    ),
+  }));
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,

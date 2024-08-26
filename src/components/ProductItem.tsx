@@ -79,30 +79,28 @@ const ProductItem: React.FC<ProductItemProps> = ({
           X
         </button>
       ) : (
-        cartQuantity && cartQuantity > 0 && (
+        cartQuantity &&
+        cartQuantity != 0 && (
           <div
-            className="position-absolute start-0 top-0 m-2"
+            className="position-absolute d-flex align-items-center start-0 top-0 m-2"
             style={{ zIndex: 10 }}
           >
-            <Image src="/cart.jpg" alt="Cart" width={24} height={24} />
             <span
+              className="badge bg-danger ms-1"
               style={{
-                position: "absolute",
+                position: "relative",
                 top: "-8px",
-                right: "-8px",
-                backgroundColor: "red",
-                color: "black",
-                borderRadius: "50%",
-                padding: "2px 5px",
                 fontSize: "0.75rem",
                 zIndex: 1,
               }}
             >
               {cartQuantity}
             </span>
+            <img src="/cart.jpg" alt="Cart" width={24} height={24} />
           </div>
         )
       )}
+
       <div
         className="position-relative d-flex align-items-center justify-content-center overflow-hidden"
         style={{ height: "200px" }}

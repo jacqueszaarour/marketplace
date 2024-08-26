@@ -192,16 +192,22 @@ export default function Home() {
       />
       <h2 className="mb-4 text-center">Vention Flowers</h2>
       <div className="row">
-        {products.map((product) => (
-          <div key={product.id} className="col-md-4 mb-4">
-            <ProductItem
-              {...product}
-              isStoreManager={isStoreManager}
-              onDelete={() => handleDelete(product.id)}
-              addToCart={() => addToCart(product)}
-            />
-          </div>
-        ))}
+        {products.map((product) => {
+          const cartItem = cart.find((item) => item.productId === product.id);
+          const cartQuantity = cartItem ? cartItem.quantity : undefined;
+  
+          return (
+            <div key={product.id} className="col-md-4 mb-4">
+              <ProductItem
+                {...product}
+                isStoreManager={isStoreManager}
+                onDelete={() => handleDelete(product.id)}
+                addToCart={() => addToCart(product)}
+                cartQuantity={cartQuantity}
+              />
+            </div>
+          );
+        })}
       </div>
       {isCartOpen && (
         <CartSidebar
@@ -214,4 +220,5 @@ export default function Home() {
       )}
     </div>
   );
+  
 }
