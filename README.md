@@ -24,7 +24,6 @@ This project is a simple marketplace application built using React, where users 
 - Frontend: React, TypeScript, Bootstrap
 - Backend: Node.js, Prisma, SQLite
 - Template: T3 Stack
-- Learning and Experience ###
 
 ## Let's do this ##
 
