@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     /* Base Options: */
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "ESNext",
@@ -9,7 +10,6 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "outDir": "./prisma/dist",
-
 
     /* Strictness */
     "strict": true,
@@ -39,9 +39,8 @@
     ".next/types/**/*.ts",
     "src/**/*",
     "tailwind.config.ts",
-    "prisma/**/*.ts", 
+    "prisma/**/*.ts",
     "src/**/*.ts"
-
   ],
   "exclude": ["node_modules", "dist"]
 }

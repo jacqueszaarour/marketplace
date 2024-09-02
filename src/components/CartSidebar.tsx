@@ -1,5 +1,6 @@
 import React from "react";
-import { CartItem } from "~/pages/index";
+import { type CartItem } from "~/pages/index";
+import Image from "next/image";
 
 interface CartSidebarProps {
   cartItems: CartItem[];
@@ -49,7 +50,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                 x
               </button>
               <div className="d-flex align-items-center">
-                <img
+                <Image
                   src={item.product.imageUrl}
                   alt={item.product.name}
                   style={{

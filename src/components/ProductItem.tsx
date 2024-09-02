@@ -96,7 +96,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
             >
               {cartQuantity}
             </span>
-            <img src="/cart.jpg" alt="Cart" width={24} height={24} />
+            <Image src="/cart.jpg" alt="Cart" width={24} height={24} />
           </div>
         )
       )}
