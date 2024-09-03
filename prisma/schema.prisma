@@ -2,7 +2,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:Youwangitain12@database-1.c5ekmeoy6wsk.us-east-2.rds.amazonaws.com:5432/postgres?schema=public"
 }
 
 
