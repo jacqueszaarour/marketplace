@@ -1,11 +1,12 @@
-import { defineBackend } from '@aws-amplify/backend';
-import { auth } from './auth/resource';
-import { data } from './data/resource';
+import { defineBackend } from "@aws-amplify/backend";
+import { auth } from "./auth/resource";
+import { data } from "./data/resource";
+import { cartHandler } from "./backend/function/cartHandler/src/resource";
+import { productHandler } from "./backend/function/productHandler/src/resource";
 
-/**
- * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
- */
 defineBackend({
   auth,
   data,
+  cartHandler,
+  productHandler,
 });
